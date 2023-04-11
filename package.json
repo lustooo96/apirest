@@ -1,0 +1,14 @@
+{
+  "name": "apirest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lustooo96/apirest.git",
+  "author": "Lusto",
+  "license": "MIT",
+  "script": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
