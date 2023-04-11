@@ -22,7 +22,7 @@ class Client extends Model {
               msg: "Please fill in the Description field!",
             },
             len: {
-              args: [0, 255],
+              args: [0, 50],
               msg: "The Description field must have a maximum of 50 character(s).",
             },
           },
@@ -39,19 +39,32 @@ class Client extends Model {
               msg: "Please fill in the Description field!",
             },
             len: {
-              args: [0, 50],
-              msg: "The Description field must have a maximum of 50 character(s).",
+              args: [0, 80],
+              msg: "The Description field must have a maximum of 80 character(s).",
             },
           },
         },
 
         birth_date: {
           type: DataTypes.DATE,
+          allowNull: false,
         },
 
         cpf: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.STRING,
           allowNull: false,
+          validate: {
+            notEmpty: {
+              msg: "Please fill in the Description field!",
+            },
+            notNull: {
+              msg: "Please fill in the Description field!",
+            },
+            len: {
+              args: [11, 11],
+              msg: "The Description field must have a maximum of 11 character(s).",
+            },
+          },
         },
       },
       {
