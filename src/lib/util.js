@@ -1,11 +1,25 @@
 const fs = require("fs");
+const csv = require("csv-parser");
+const { Readable } = require("stream");
 
 const util = {};
 
-util.readFile = (arquivo) =>
+util.importData = (buffer) => {
+  const result = [];
   new Promise((resolve, reject) => {
-    //Lembrar de usar o Fs
+    const stream = Readable.from(buffer);
+
+    stream
+      .pipe(csv())
+      .on("data", (data) => result.push(data))
+      .on("end", () => {
+        resolve(result);
+      })
+      .on("error", (error) => {
+        reject(error);
+      });
   });
+};
 
 // Validations
 util.isValidCpf = function f(strCPF) {

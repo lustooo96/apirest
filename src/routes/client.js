@@ -1,4 +1,10 @@
 const client = require("../controllers/client");
+const multer = require("multer");
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 1024 * 1024 * 5 },
+});
 
 module.exports = (app) => {
   app.get("/client", client.getCient);
@@ -7,5 +13,5 @@ module.exports = (app) => {
   app.put("/client/:idclient", client.putClient);
   app.delete("/client/:idclient", client.deleteClient);
 
-  app.post("/importClient", client.postImportClient);
+  app.post("/importClient", upload.any(), client.postImportClient);
 };

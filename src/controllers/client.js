@@ -1,4 +1,5 @@
 const Client = require("../models/Client");
+const util = require("../lib/util");
 
 module.exports = {
   async getCient(req, res) {
@@ -6,12 +7,12 @@ module.exports = {
       const { page, pageSize } = req.query;
       const offset = (page - 1) * pageSize;
 
-      const clints = await Model.findAndCountAll({
+      const clients = await Client.findAndCountAll({
         offset,
         limit: pageSize,
       });
 
-      return res.json(clints);
+      return res.json(clients);
     } catch (e) {
       return res.status(500).json({ error: e });
     }
@@ -21,9 +22,13 @@ module.exports = {
     try {
       const { idclient } = req.params;
 
-      const clientRt = await User.findOne({
-        where: { id: idclient },
+      const clientRt = await Client.findOne({
+        where: { idclient },
       });
+
+      if (!clientRt) {
+        return res.status(404).json({ error: "Client not found" });
+      }
 
       return res.json(clientRt);
     } catch (e) {
@@ -47,10 +52,13 @@ module.exports = {
 
   async postImportClient(req, res) {
     try {
-      const file = req.file;
+      const file = req.files;
+
+      util.readFile(req.files[0].buffer);
+      console.log("file", file);
 
       const results = [];
-      await Client.bulkCreate(results);
+      //await Client.bulkCreate(results);
     } catch (e) {
       return res.status(500).json({ error: e });
     }
