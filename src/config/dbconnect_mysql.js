@@ -4,6 +4,7 @@ module.exports = function db() {
   const connect = {
     host: process.env.DBHOST,
     user: process.env.DBUSERNAME,
+    port: process.env.DBPORT,
     password: process.env.DBPASSWORD,
     connectionLimit: parseInt(process.env.DBPOOLMAX, 10),
     waitForConnections: true,

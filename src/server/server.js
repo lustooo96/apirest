@@ -9,6 +9,8 @@ require("dotenv").config();
 
 const upload = multer({ dest: "uploads/" });
 
+require("../database/index");
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -19,9 +21,16 @@ app.use(connectMysql(poolMysql));
 
 const { PORT } = process.env;
 
-console.log("PORT", PORT);
-
 consign().include("./src/routes").into(app);
+
+app.use((req, res) => {
+  const msg = `Route not found! ${req.url}`;
+  res.status(404).json({ error: "Route not found!" });
+});
+
+app.use((err, req, res, next) => {
+  return res.status(500).json({ error: err.toString() });
+});
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

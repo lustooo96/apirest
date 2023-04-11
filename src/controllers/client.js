@@ -33,8 +33,6 @@ module.exports = {
 
   async postClient(req, res) {
     try {
-      console.log("req.body", req.body);
-      console.log("Client", Client);
       const client = await Client.create(req.body);
 
       const clientRT = await Client.findOne({

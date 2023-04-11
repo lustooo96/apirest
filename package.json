@@ -5,8 +5,8 @@
   "repository": "https://github.com/lustooo96/apirest.git",
   "author": "Lusto",
   "license": "MIT",
-  "script": {
-    "start": "node src/server/server.js"
+  "scripts": {
+    "start": "nodemon src/server/server.js"
   },
   "dependencies": {
     "consign": "^0.1.6",
@@ -17,6 +17,7 @@
     "fs": "^0.0.1-security",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.2.0",
+    "nodemon": "^2.0.22",
     "sequelize": "^6.31.0"
   }
 }
